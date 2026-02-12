@@ -13,7 +13,7 @@ import {
 import { ThemeToggle } from '@/hooks/use-toogle'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { FaBlog, FaBriefcase, FaCode, FaEnvelope, FaProjectDiagram, FaUser } from 'react-icons/fa'
+import { FaBriefcase, FaCode, FaEnvelope, FaUser } from 'react-icons/fa'
 import { Button } from '../ui/button'
 
 export function Navbar() {

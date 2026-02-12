@@ -5,7 +5,7 @@ import { FC, JSX } from 'react'
 import Image from 'next/image'
 // Removed company images to avoid broken image references
 import { Timeline as TimelineComponent } from '@/components/ui/timeline'
-import { FaBriefcase, FaBuilding, FaCode, FaLaptopCode } from 'react-icons/fa'
+import { FaBriefcase, FaBuilding } from 'react-icons/fa'
 
 export interface TimelineItem {
   id: number

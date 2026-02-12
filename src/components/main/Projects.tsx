@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  IconArrowWaveRightUp,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from '@tabler/icons-react'
+import { IconArrowWaveRightUp, IconClipboardCopy, IconFileBroken } from '@tabler/icons-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FaGithub } from 'react-icons/fa'
