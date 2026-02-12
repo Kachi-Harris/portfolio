@@ -2,7 +2,17 @@ export const runtime = 'edge'
 
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazily instantiate Resend to avoid throwing at build-time when the API key
+// is not present in the environment (e.g., during static build on CI).
+let resend: Resend | null = null
+function getResend() {
+  if (!resend) {
+    const key = process.env.RESEND_API_KEY
+    if (!key) return null
+    resend = new Resend(key)
+  }
+  return resend
+}
 
 interface FormData {
   name: string
@@ -52,8 +62,14 @@ export async function POST(req: Request) {
   const sanitizedSubject = subject.replace(/[<>]/g, '')
   const sanitizedMessage = message.replace(/[<>]/g, '')
 
+  const client = getResend()
+  if (!client) {
+    // If API key is not configured, return a 503 so callers know email service is unavailable.
+    return new Response(JSON.stringify({ error: 'Email service not configured' }), { status: 503 })
+  }
+
   try {
-    const { error } = await resend.emails.send({
+    const { error } = await client.emails.send({
       from: `Contact Form <no-reply@portfolio>`,
       to: ['harrisanyanwu24@gmail.com'],
       replyTo: email,
